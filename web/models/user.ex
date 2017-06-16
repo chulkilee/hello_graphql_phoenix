@@ -15,14 +15,4 @@ defmodule HelloGraphQL.User do
     |> cast(params, [:name])
     |> validate_required([:name])
   end
-
-  def find_by_name(name) do
-    HelloGraphQL.User
-    |> HelloGraphQL.Repo.get_by(name: name)
-  end
-
-  def find_by_id(id) do
-    HelloGraphQL.User
-    |> HelloGraphQL.Repo.get(id)
-  end
 end

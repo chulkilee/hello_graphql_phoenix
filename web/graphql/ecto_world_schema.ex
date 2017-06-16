@@ -3,6 +3,7 @@ defmodule GraphQL.Schema.EctoWorld do
   alias GraphQL.Type.ObjectType
   alias GraphQL.Type.String
   alias GraphQL.Type.ID
+  alias HelloGraphQL.{User, Repo}
 
   def schema do
     %Schema{
@@ -23,12 +24,22 @@ defmodule GraphQL.Schema.EctoWorld do
   end
 
   def greeting(_source, %{name: name}, _info) do
-    user = HelloGraphQL.User.find_by_name(name)
-    "Hello, #{user.name}!"
+    User
+    |> Repo.get_by!(name: name)
+    |> greeting_message
   end
+
   def greeting(_source, %{id: id}, _info) do
-    user = HelloGraphQL.User.find_by_id(id)
-    "Hello, #{user.name}!"
+    User
+    |> Repo.get!(id)
+    |> greeting_message
   end
-  def greeting(_source, _args, _info), do: "Hello, world!"
+
+  def greeting(_source, _args, _info), do: greeting_message("world")
+
+  defp greeting_message(%User{name: name}), do: greeting_message(name)
+
+  defp greeting_message(name) do
+    "Hello, #{name}!"
+  end
 end
