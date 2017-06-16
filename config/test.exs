@@ -9,10 +9,11 @@ config :hello_graphql, HelloGraphQL.Endpoint,
 # Print only warnings and errors during test
 config :logger, level: :warn
 
+# Configure your database
 config :hello_graphql, HelloGraphQL.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "",
+  # username: "postgres",
+  # password: "",
   database: "hello_graphql_test",
   hostname: "localhost",
-  pool_size: 10
+  pool: Ecto.Adapters.SQL.Sandbox

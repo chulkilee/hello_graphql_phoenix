@@ -4,7 +4,7 @@ defmodule HelloGraphQL.ConnCase do
   tests that require setting up a connection.
 
   Such tests rely on `Phoenix.ConnTest` and also
-  imports other functionality to make it easier
+  import other functionality to make it easier
   to build and query models.
 
   Finally, if the test case interacts with the database,
@@ -20,6 +20,11 @@ defmodule HelloGraphQL.ConnCase do
       # Import conveniences for testing with connections
       use Phoenix.ConnTest
 
+      alias HelloGraphQL.Repo
+      import Ecto
+      import Ecto.Changeset
+      import Ecto.Query
+
       import HelloGraphQL.Router.Helpers
 
       # The default endpoint for testing
@@ -28,7 +33,12 @@ defmodule HelloGraphQL.ConnCase do
   end
 
   setup tags do
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(HelloGraphQL.Repo)
 
-    :ok
+    unless tags[:async] do
+      Ecto.Adapters.SQL.Sandbox.mode(HelloGraphQL.Repo, {:shared, self()})
+    end
+
+    {:ok, conn: Phoenix.ConnTest.build_conn()}
   end
 end

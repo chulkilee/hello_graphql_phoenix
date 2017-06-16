@@ -13,18 +13,11 @@ use Mix.Config
 # which you typically run after static files are built.
 config :hello_graphql, HelloGraphQL.Endpoint,
   http: [port: {:system, "PORT"}],
-  cache_static_manifest: "priv/static/manifest.json",
-  secret_key_base: System.get_env("SECRET_KEY_BASE")
+  # url: [host: "example.com", port: 80],
+  cache_static_manifest: "priv/static/manifest.json"
 
 # Do not print debug messages in production
 config :logger, level: :info
-
-# Configure your database
-config :hello_graphql, HelloGraphQL.Repo,
-  adapter: Ecto.Adapters.Postgres,
-  database: "hello_graphql_prod",
-  url: System.get_env("DATABASE_URL"),
-  pool_size: 20
 
 # ## SSL Support
 #
@@ -66,3 +59,13 @@ config :hello_graphql, HelloGraphQL.Repo,
 # Finally import the config/prod.secret.exs
 # which should be versioned separately.
 # import_config "prod.secret.exs"
+
+config :hello_graphql, HelloGraphQL.Endpoint,
+  secret_key_base: System.get_env("SECRET_KEY_BASE")
+
+# Configure your database
+config :hello_graphql, HelloGraphQL.Repo,
+  adapter: Ecto.Adapters.Postgres,
+  database: "hello_graphql_prod",
+  url: System.get_env("DATABASE_URL"),
+  pool_size: 20
