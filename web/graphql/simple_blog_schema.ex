@@ -1,5 +1,5 @@
 defmodule GraphQL.Schema.SimpleBlog do
-  alias GraphQL.Type.{ObjectType, List, NonNull, ID, String, Int, Boolean}
+  alias GraphQL.Type.{Boolean, ID, Int, List, NonNull, ObjectType, String}
   alias GraphQL.Schema.SimpleBlog
   alias GraphQL.Schema.SimpleBlog.{Article, Author, Image}
 

@@ -1,7 +1,6 @@
 defmodule GraphQL.Schema.HelloWorld do
   alias GraphQL.Schema
-  alias GraphQL.Type.ObjectType
-  alias GraphQL.Type.String
+  alias GraphQL.Type.{ObjectType, String}
 
   def schema do
     %Schema{

@@ -1,8 +1,6 @@
 defmodule GraphQL.Schema.EctoWorld do
   alias GraphQL.Schema
-  alias GraphQL.Type.ObjectType
-  alias GraphQL.Type.String
-  alias GraphQL.Type.ID
+  alias GraphQL.Type.{ID, ObjectType, String}
   alias HelloGraphQL.{User, Repo}
 
   def schema do
