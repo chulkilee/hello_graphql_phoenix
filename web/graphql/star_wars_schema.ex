@@ -111,7 +111,7 @@ defmodule GraphQL.Schema.StarWars do
   end
 
   def schema do
-    %GraphQL.Schema{query: query}
+    %GraphQL.Schema{query: query()}
   end
 end
 
@@ -122,12 +122,12 @@ defmodule StarWars.Data do
 
   def get_human(nil), do: nil
   def get_human(id) do
-    Map.get(human_data, String.to_atom(id), nil)
+    Map.get(human_data(), String.to_atom(id), nil)
   end
 
   def get_droid(nil), do: nil
   def get_droid(id) do
-    Map.get(droid_data, String.to_atom(id), nil)
+    Map.get(droid_data(), String.to_atom(id), nil)
   end
 
   def get_friends(character) do
@@ -135,9 +135,9 @@ defmodule StarWars.Data do
     |> Enum.map(&(get_character(&1)))
   end
 
-  def get_hero(5), do: luke
-  def get_hero(_), do: artoo
-  def get_hero, do: artoo
+  def get_hero(5), do: luke()
+  def get_hero(_), do: artoo()
+  def get_hero, do: artoo()
 
   def luke do
     %{id: "1000",
@@ -178,8 +178,8 @@ defmodule StarWars.Data do
   end
 
   def human_data do
-    %{"1000": luke, "1001": vader, "1002": han,
-      "1003": leia, "1004": tarkin}
+    %{"1000": luke(), "1001": vader(), "1002": han(),
+      "1003": leia(), "1004": tarkin()}
   end
 
   def threepio do
@@ -199,6 +199,6 @@ defmodule StarWars.Data do
   end
 
   def droid_data do
-    %{"2000": threepio, "2001": artoo}
+    %{"2000": threepio(), "2001": artoo()}
   end
 end
